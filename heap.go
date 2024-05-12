@@ -2,7 +2,7 @@ package heap
 
 // Note :- to simplify the implimentation heap will start with index 1
 
-// heap rules for positions 
+// heap rules for positions
 // left child :- 2*i (where i is the parent index)
 // right child :- 2*i+1
 // parent :- n/2 (where n is the child node index)
@@ -67,13 +67,17 @@ func Heapify[T any](arr []T, f HeapFunc[T]) *heap[T] {
 	return h
 }
 
+func (heap *heap[T]) Length() int {
+	return len(heap.data) - 1
+}
+
 func (heap *heap[T]) balance(parent int) {
 	h := heap.data
 
 	for {
 		left, right, unbalancedParent := parent*2, parent*2+1, parent
 
-		// to get the minValue between left and right child at parent position 
+		// to get the minValue between left and right child at parent position
 		// used below leftSwap tric
 		leftSwap := false
 		if left < len(h) && !heap.heapFunc(h, parent, left) {
